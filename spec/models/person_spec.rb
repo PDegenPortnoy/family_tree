@@ -157,4 +157,5 @@ describe Person do
       @e.siblings.map(&:name).should include("C")
     end
   end
+  
 end

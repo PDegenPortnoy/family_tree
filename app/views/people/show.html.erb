@@ -1,15 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @person.name %>
-</p>
+<%= content_tag :div, class: 'person' do -%>
+  <%= render @person %>
+<% end -%>
 
-<p>
-  <b>Birthdate:</b>
-  <%= @person.birthdate %>
-</p>
-
-
-<%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Back', people_path %>

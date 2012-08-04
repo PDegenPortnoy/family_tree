@@ -14,6 +14,10 @@ class PeopleController < ApplicationController
   # GET /people/1.json
   def show
     @person = Person.find(params[:id])
+    @spouse = @person.spouse
+    @parents = @person.parents
+    @siblings = @person.siblings
+    @children = @person.children
 
     respond_to do |format|
       format.html # show.html.erb

@@ -37,7 +37,6 @@ class Person < ActiveRecord::Base
   
   def siblings
     sibs = Offspring.peer_ids(self.id)
-    puts "Person#siblings found: #{sibs.inspect}"
     Person.where(id: sibs) # return [] if no siblings w/o raising exception
   end
 end
