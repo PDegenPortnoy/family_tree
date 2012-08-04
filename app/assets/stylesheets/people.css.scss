@@ -1,3 +1,31 @@
 // Place all the styles related to the people controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.person_detail {
+  position: relative;
+}
+
+.parents {
+  background-color: #F0E0FF;
+  min-height: 20px;
+}
+
+.float {
+  float: left;
+  width: 150px;
+  padding: 10px; 
+
+}
+.person {
+  background-color: #FFFFF0;
+  font-weight: bold;
+}
+
+.spouse {
+  background-color: #FFFFE0;
+}
+
+.clear {
+  clear: both;
+}

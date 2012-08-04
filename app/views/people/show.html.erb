@@ -1,7 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<%= content_tag :div, class: 'person' do -%>
-  <%= render @person %>
+<%= content_tag :div, class: 'person_detail' do -%>
+
+  <%= content_tag :div, class: 'parents' do -%>
+    <p>Parents go here</p>
+  <% end %>
+
+  <%= content_tag :div, class: 'float spouse' do -%>
+    <%= render @spouse %>
+  <% end %>
+
+  <%= content_tag :div, class: 'float person' do -%>
+    <%= render @person %>
+  <% end -%>
+  
+
 <% end -%>
+
+<%= content_tag :div, '', class: 'clear' %>
+
 
 <%= link_to 'Back', people_path %>
