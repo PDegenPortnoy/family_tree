@@ -23,6 +23,7 @@ class Person < ActiveRecord::Base
     p = Person.create(name: name, birthdate: birthdate)
     offspring.create(target: p.id)
     spouse.offspring.create(target: p.id) if married?
+    p
   end
 
   def children
@@ -30,4 +31,13 @@ class Person < ActiveRecord::Base
     Person.find(offspring.map(&:target))
   end
   
+  def parents
+    Person.find(Offspring.producers(self.id).map(&:person_id))
+  end
+  
+  def siblings
+    sibs = Offspring.peer_ids(self.id)
+    puts "Person#siblings found: #{sibs.inspect}"
+    Person.where(id: sibs) # return [] if no siblings w/o raising exception
+  end
 end
