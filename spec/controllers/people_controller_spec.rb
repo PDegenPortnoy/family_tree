@@ -36,7 +36,7 @@ describe PeopleController do
 
   describe "GET index" do
     it "assigns all people as @people" do
-      person = Person.create! valid_attributes
+      person = FactoryGirl.create(:person)
       get :index, {}, valid_session
       assigns(:people).should eq([person])
     end
@@ -44,7 +44,7 @@ describe PeopleController do
 
   describe "GET show" do
     it "assigns the requested person as @person" do
-      person = Person.create! valid_attributes
+      person = FactoryGirl.create(:person)
       get :show, {:id => person.to_param}, valid_session
       assigns(:person).should eq(person)
     end
@@ -59,7 +59,7 @@ describe PeopleController do
 
   describe "GET edit" do
     it "assigns the requested person as @person" do
-      person = Person.create! valid_attributes
+      person = FactoryGirl.create(:person)
       get :edit, {:id => person.to_param}, valid_session
       assigns(:person).should eq(person)
     end
@@ -69,18 +69,18 @@ describe PeopleController do
     describe "with valid params" do
       it "creates a new Person" do
         expect {
-          post :create, {:person => valid_attributes}, valid_session
+          post :create, {:person => FactoryGirl.attributes_for(:person)}, valid_session
         }.to change(Person, :count).by(1)
       end
 
       it "assigns a newly created person as @person" do
-        post :create, {:person => valid_attributes}, valid_session
+        post :create, {:person => FactoryGirl.attributes_for(:person)}, valid_session
         assigns(:person).should be_a(Person)
         assigns(:person).should be_persisted
       end
 
       it "redirects to the created person" do
-        post :create, {:person => valid_attributes}, valid_session
+        post :create, {:person => FactoryGirl.attributes_for(:person)}, valid_session
         response.should redirect_to(Person.last)
       end
     end
@@ -105,7 +105,7 @@ describe PeopleController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested person" do
-        person = Person.create! valid_attributes
+        person = FactoryGirl.create(:person)
         # Assuming there are no other people in the database, this
         # specifies that the Person created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -115,13 +115,13 @@ describe PeopleController do
       end
 
       it "assigns the requested person as @person" do
-        person = Person.create! valid_attributes
+        person = FactoryGirl.create(:person)
         put :update, {:id => person.to_param, :person => valid_attributes}, valid_session
         assigns(:person).should eq(person)
       end
 
       it "redirects to the person" do
-        person = Person.create! valid_attributes
+        person = FactoryGirl.create(:person)
         put :update, {:id => person.to_param, :person => valid_attributes}, valid_session
         response.should redirect_to(person)
       end
@@ -129,15 +129,15 @@ describe PeopleController do
 
     describe "with invalid params" do
       it "assigns the person as @person" do
-        person = Person.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
+        person = FactoryGirl.create(:person)
+          # Trigger the behavior that occurs when invalid params are submitted
         Person.any_instance.stub(:save).and_return(false)
         put :update, {:id => person.to_param, :person => {}}, valid_session
         assigns(:person).should eq(person)
       end
 
       it "re-renders the 'edit' template" do
-        person = Person.create! valid_attributes
+        person = FactoryGirl.create(:person)
         # Trigger the behavior that occurs when invalid params are submitted
         Person.any_instance.stub(:save).and_return(false)
         put :update, {:id => person.to_param, :person => {}}, valid_session
@@ -148,14 +148,14 @@ describe PeopleController do
 
   describe "DELETE destroy" do
     it "destroys the requested person" do
-      person = Person.create! valid_attributes
+      person = FactoryGirl.create(:person)
       expect {
         delete :destroy, {:id => person.to_param}, valid_session
       }.to change(Person, :count).by(-1)
     end
 
     it "redirects to the people list" do
-      person = Person.create! valid_attributes
+      person = FactoryGirl.create(:person)
       delete :destroy, {:id => person.to_param}, valid_session
       response.should redirect_to(people_url)
     end
