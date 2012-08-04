@@ -17,7 +17,7 @@ describe Person do
     Person.where(name: FactoryGirl.attributes_for(:person)[:name]).first.should eq(p)
   end
   
-  describe "marriage" do
+  describe "get married" do
     before(:each) do
       @a = FactoryGirl.create(:person, name: "A")
       @b = FactoryGirl.create(:person, name: "B")
@@ -28,15 +28,72 @@ describe Person do
     end
 
     it "should be married" do
-      @a.marry(@b)
+      @a.marry @b
       @a.married?.should be_true
       @b.married?.should be_true
     end
 
     it "should return the partner" do
-      @a.marry(@b)
+      @a.marry @b
       @a.spouse.should == @b
       @b.spouse.should == @a
     end
+  end
+  
+  describe "has a child" do
+    
+    before(:each) do
+      @a = FactoryGirl.create(:person, name: "A")
+      @b = FactoryGirl.create(:person, name: "B")
+      @a.marry @b
+    end
+    
+    it "should create a child" do
+      @a.has_child("C")
+      Person.where(name: "C").first.should_not be_nil
+    end
+    
+    it "should have the child" do
+      @a.has_child("C")
+      @a.children.first.should == Person.where(name: "C").first
+    end
+    
+    it "should create the child for the other parent too" do
+      @a.has_child("C")
+      @b.children.first.should == Person.where(name: "C").first
+    end
+  end
+  
+  describe "has multiple children" do
+    
+    before(:each) do
+      @a = FactoryGirl.create(:person, name: "A")
+      @b = FactoryGirl.create(:person, name: "B")
+      @a.marry @b
+    end
+    
+    it "should create multiple children for one parent" do
+      @a.has_child("C")
+      @a.has_child("D")
+      @a.has_child("E")
+      @a.children.size.should == 3
+    end
+    
+    it "should have the same number of children for the other parent" do
+      @a.has_child("C")
+      @a.has_child("D")
+      @a.has_child("E")
+      @b.children.size.should == 3
+    end
+    
+    it "should have the same number of children for both parents" do
+      @a.has_child("C")
+      @a.has_child("D")
+      @b.has_child("E")
+      @b.has_child("E")
+      @a.children.size.should == 4
+      @b.children.size.should == 4
+    end
+    
   end
 end
