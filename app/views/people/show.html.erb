@@ -25,5 +25,12 @@
 
 <%= content_tag :div, '', class: 'clear' %>
 
+  <% unless @children.nil? -%>
+    <% @children.each do |child| -%>
+      <%= render child, div_class: 'child' %>
+    <% end -%>
+  <% end -%>
+
+<%= content_tag :div, '', class: 'clear' %>
 
 <%= link_to 'Back', people_path %>
