@@ -1,6 +1,11 @@
 .header {
   height: 100px;
   padding-top: -10px;
+  
+  .logo{
+  float: left;
+  padding-right: 10px;
+  }
 
   h1 {
     color: #24246B;
@@ -16,7 +21,7 @@ body {
 }
 
 #Content {
-  width: 980px;
+  width: 1200px;
   margin: 0px auto;
   text-align: left;
   padding: 15px;

@@ -1,4 +1,5 @@
-<%= content_tag :div, class: "float #{div_class}" do -%>
-  <%= content_tag :p,  link_to(person.name, person_path(person)), class: 'name' -%>
+<%= content_tag :div, class: "detail_box #{div_class}" do -%>
+  <%= content_tag :p, link_to(person.name, person_path(person)), class: 'name' -%>
   <%= content_tag :p, distance_of_time_in_words(Date.today(), person.birthdate), class: 'age'%>
+  <%= content_tag :p, build_links(person), class: 'links' %>
 <% end -%>

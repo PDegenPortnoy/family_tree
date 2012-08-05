@@ -1,2 +1,25 @@
-Use this README file to introduce your application and point to useful places in the API for learning more.
-Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+Saving Star: Family Tree Exercise
+Peter Degen-Portnoy
+August 5, 2012
+
+
+== To Install ==
+> rake db:create
+> rake db:setup
+
+== To Verify Installation ==
+> rake spec
+
+== To Run ==
+> rails s
+Running at default location: localhost:3000
+
+
+== Notes ==
+ * A family has to start somewhere.  Siblings are defined by having the same parent (at least one),
+   so, at the top of the family tree, which are the root node grandparents, those grandparents
+   can't have any siblings
+ * Marriage is between two people, no checking is performed.  Polygamy is not allowed.
+ * Divorce is not implemented, but would be supported.  People can end their marriage, marry to another, 
+   and produce offspring
+ 

@@ -6,11 +6,38 @@
   position: relative;
 }
 
-.float {
+.detail_box {
   float: left;
-  width: 150px;
+  width: 190px;
   padding: 10px; 
-  margin: 6px;
+  margin: 6px;  
+}
+
+.narrow_box {
+  float: left;
+  width: 20px;
+  padding: 10px; 
+  margin: 6px;  
+}
+.shadow {
+  -moz-box-shadow:    3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow:         3px 3px 5px 6px #ccc;
+}
+
+.rotated_text {
+  display: block;
+  position: relative;
+  bottom: -80px;
+  # writing-mode:tb-rl;
+  -moz-transform: rotate(270deg);
+  -moz-transform-origin: 50% 50%;
+  -webkit-transform: rotate(270deg);
+  -webkit-transform-origin: 50% 50%;
+  font-family: ‘Trebuchet MS’, Helvetica, sans-serif;
+  font-size:24px;
+  font-weight:normal;
+  text-shadow: 0px 0px 1px #333;
 }
 
 .parents {
@@ -41,4 +68,9 @@
 
 .clear {
   clear: both;
+}
+
+.links {
+  font-size: 9px;
+  font-weight: normal;
 }

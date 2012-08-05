@@ -36,9 +36,9 @@ describe PeopleController do
 
   describe "GET index" do
     it "assigns all people as @people" do
-      person = FactoryGirl.create(:person)
+      people = Person.all
       get :index, {}, valid_session
-      assigns(:people).should eq([person])
+      assigns(:people).should eq(people)
     end
   end
 
