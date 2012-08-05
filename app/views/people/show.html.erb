@@ -2,19 +2,25 @@
 
 <%= content_tag :div, class: 'person_detail' do -%>
 
-  <%= content_tag :div, class: 'parents' do -%>
-    <p>Parents go here</p>
-  <% end %>
-
-  <%= content_tag :div, class: 'float spouse' do -%>
-    <%= render @spouse %>
-  <% end %>
-
-  <%= content_tag :div, class: 'float person' do -%>
-    <%= render @person %>
+  <% if @parents -%>
+    <% @parents.each do |parent |%>
+      <%= render parent, div_class: 'parents' %>
+    <% end -%>
   <% end -%>
-  
 
+  <%= content_tag :div, '', class: 'clear' %>
+
+  <% if @spouse -%>
+    <%= render @spouse, div_class: 'spouse' %>
+  <% end -%>
+
+    <%= render @person, div_class: 'person' %>
+
+  <% unless @siblings.empty? -%>
+    <% @siblings.each do |sibling| -%>
+      <%= render sibling, div_class: 'sibling' %>
+    <% end -%>
+  <% end -%>
 <% end -%>
 
 <%= content_tag :div, '', class: 'clear' %>

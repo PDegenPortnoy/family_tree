@@ -6,20 +6,22 @@
   position: relative;
 }
 
-.parents {
-  background-color: #F0E0FF;
-  min-height: 20px;
-}
-
 .float {
   float: left;
   width: 150px;
   padding: 10px; 
-
+  margin: 6px;
 }
+
+.parents {
+  background-color: #F0E0FF;
+  border: 6px groove #853385;
+}
+
 .person {
   background-color: #FFFFF0;
   font-weight: bold;
+  border: 8px outset #FFC299;
 }
 
 .spouse {

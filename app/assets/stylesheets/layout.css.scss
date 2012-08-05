@@ -1,6 +1,6 @@
 .header {
-  background-color: #C2C2D6;
   height: 100px;
+  padding-top: -10px;
 
   h1 {
     color: #24246B;
@@ -8,4 +8,18 @@
     line-height: 39px;
     padding: 10px;
   }
+}
+
+body {
+  margin: 20px 0px; padding:0px;
+  text-align: center;
+}
+
+#Content {
+  width: 980px;
+  margin: 0px auto;
+  text-align: left;
+  padding: 15px;
+  border: 1px double #333;
+  background-color: #eee;
 }
