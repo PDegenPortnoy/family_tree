@@ -191,6 +191,5 @@ describe Person do
       @a.children.size.should == 1
       @a.children[0].name.should == "B"
     end
-    
-  end
+  end  
 end

@@ -52,7 +52,6 @@ class PeopleController < ApplicationController
     if relationship
       @person = Person.find(origin)
       @person.create_relationship(relationship, params)
-      # redirect_to @person and return
     else
       @person = Person.new(params[:person])
     end
@@ -98,9 +97,17 @@ class PeopleController < ApplicationController
     end
   end
   
-  # POST /people/1/parent
-  def parent
+  # GET /people/1/select_spouse
+  def select_spouse
     @person = Person.find(params[:id])
-    
+    @available = Person.unmarried
+  end
+  
+  # POST /people/1/marry
+  def marry
+    person = Person.find(params[:id])
+    spouse = Person.find(params[:spouse])
+    person.marry(spouse)
+    redirect_to person_path(person) and return
   end
 end

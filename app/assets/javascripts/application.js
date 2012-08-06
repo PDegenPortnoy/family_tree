@@ -19,7 +19,7 @@
 
 $(document).ready(function() {
   $('.create_person').click(function(e) {
-    alert("create_person click event!");
+/*    alert("create_person click event!");*/
     var url = $(this).attr('href');
     var dialog_form = $('<div id="dialog-form">Loading form...</div>').dialog({
       autoOpen: false,

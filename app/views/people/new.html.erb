@@ -1,6 +1,6 @@
 <div id="content">
   <% header = (@relationship ? "New #{@relationship.humanize}" : "New Person") %>
-  <h1><New person><%= header %></h1>
+  <h1><%= header %></h1>
 
   <%= render 'form' %>
 

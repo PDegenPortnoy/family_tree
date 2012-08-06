@@ -5,6 +5,8 @@ class Person < ActiveRecord::Base
   has_one :partner
   has_many :offspring
   
+  default_scope order('birthdate asc')
+  
   def marry(b)
     create_partner(target: b.id)
     b.create_partner(target: self.id)
@@ -62,5 +64,13 @@ class Person < ActiveRecord::Base
     else
         raise 'invalid relationship: "#{relationship}"'
     end
+  end
+  
+  def self.unmarried
+    Person.find_by_sql("select * from people where id not in 
+                        (select person_id from relationships where type = 'Partner') 
+                        and id not in 
+                        (select target from relationships where type = 'Partner')
+                        order by birthdate asc")
   end
 end

@@ -1,0 +1,11 @@
+<%= content_tag :div,  id: "content" do -%>
+  <h1>Select Spouse for <%= @person.name %></h1>
+
+  <%= form_for @person, url: {action: 'marry'}, method: 'post' do |f| -%>
+    <%= f.label 'Select an available person: '%>
+    <%= select_tag('spouse', options_for_select(available_people_options(@available))) %>
+    <%= content_tag :div, class: 'actions' do -%>
+      <%= f.submit "Create" %>
+    <% end -%>
+  <% end -%>
+<% end -%>
