@@ -1,6 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-
 <%= content_tag :div, class: 'person_detail' do -%>
 
   <% unless @parents.empty? -%>
@@ -20,7 +19,7 @@
     <%= rotate_text 'Person' %>
     <%= render @person, div_class: 'person shadow' %>
 
-  <% unless @siblings.empty? -%>
+  <% unless @siblings.empty?  -%>
     <%= rotate_text 'Siblings' %>
     <% @siblings.each do |sibling| -%>
       <%= render sibling, div_class: 'sibling' %>
@@ -30,7 +29,7 @@
 
 <%= content_tag :div, '', class: 'clear' %>
 
-  <% unless @children.nil? -%>
+  <% unless @children.empty? -%>
     <%= rotate_text 'Children' %>
     <% @children.each do |child| -%>
       <%= render child, div_class: 'child' %>

@@ -14,7 +14,7 @@ describe Person do
   it "should successfully add a person" do
     p = FactoryGirl.create(:person)
     p.should be_valid
-    Person.where(name: FactoryGirl.attributes_for(:person)[:name]).first.should eq(p)
+    Person.where(name: FactoryGirl.attributes_for(:person)[:name]).last.should eq(p)
   end
   
   describe "get married" do
@@ -158,4 +158,18 @@ describe Person do
     end
   end
   
+  describe "creating parents" do
+    before(:each) do
+      @a = FactoryGirl.create(:person)
+    end
+  
+    it "should not have parents initially" do
+      @a.parents.size.should == 0
+    end
+    
+    it "should create a parent for the person" do
+      b = @a.create_parent("B", 'Jan 01, 1950')
+      b.should be_valid
+    end
+  end
 end

@@ -1,6 +1,8 @@
 FamilyTree::Application.routes.draw do
   root to: 'people#index'
-  resources :people
+  resources :people do
+    post 'parent', on: :member
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -12,3 +12,9 @@
  *= require_tree .
  */
  
+ #dialog-form {
+   border: 1px solid #ccc;
+   padding: 20px;
+ }
+ 
+ 

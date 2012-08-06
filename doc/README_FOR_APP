@@ -4,7 +4,6 @@ August 5, 2012
 
 
 == To Install ==
-> rake db:create
 > rake db:setup
 
 == To Verify Installation ==

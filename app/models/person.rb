@@ -27,16 +27,20 @@ class Person < ActiveRecord::Base
   end
 
   def children
-    return nil if offspring.empty?
-    Person.find(offspring.map(&:target))
+    Person.where(id: offspring.map(&:target)) #return [] if no children
   end
   
   def parents
-    Person.find(Offspring.producers(self.id).map(&:person_id))
+    Person.where(id: Offspring.producers(self.id).map(&:person_id)) # return [] if no parents
   end
   
   def siblings
-    sibs = Offspring.peer_ids(self.id)
-    Person.where(id: sibs) # return [] if no siblings w/o raising exception
+    Person.where(id: Offspring.peer_ids(self.id)) # return [] if no siblings
+  end
+  
+  def create_parent(name, birthdate)
+    parent = Person.create(name: name, birthdate: birthdate)
+    Offspring.create(person_id: parent.id, target: self.id)
+    parent
   end
 end
