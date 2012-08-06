@@ -19,11 +19,15 @@ class Person < ActiveRecord::Base
     Person.find(partner.target)
   end
   
-  def has_child(name, birthdate = Date.today())
-    p = Person.create(name: name, birthdate: birthdate)
-    offspring.create(target: p.id)
-    spouse.offspring.create(target: p.id) if married?
-    p
+  def has_child(name, birthdate)
+    person = Person.create(name: name, birthdate: birthdate)
+    associate_child(person)
+  end
+  
+  def associate_child(person)
+    offspring.create(target: person.id)
+    spouse.offspring.create(target: person.id) if married?
+    person
   end
 
   def children
@@ -40,7 +44,23 @@ class Person < ActiveRecord::Base
   
   def create_parent(name, birthdate)
     parent = Person.create(name: name, birthdate: birthdate)
+    associate_parent(parent)
+  end
+  
+  def associate_parent(parent)
     Offspring.create(person_id: parent.id, target: self.id)
     parent
+  end
+  
+  def create_relationship(relationship, params)
+    person = Person.create(params['person'])
+    case relationship
+    when 'parent'
+        associate_parent(person)
+    when 'child'
+        associate_child(person)
+    else
+        raise 'invalid relationship: "#{relationship}"'
+    end
   end
 end

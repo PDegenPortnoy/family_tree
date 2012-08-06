@@ -18,7 +18,8 @@
 // This file is automatically included by javascript_include_tag :defaults
 
 $(document).ready(function() {
-  $('#create_person').click(function(e) {
+  $('.create_person').click(function(e) {
+    alert("create_person click event!");
     var url = $(this).attr('href');
     var dialog_form = $('<div id="dialog-form">Loading form...</div>').dialog({
       autoOpen: false,

@@ -48,18 +48,18 @@ describe Person do
     end
     
     it "should create a child" do
-      @a.has_child("C")
+      @a.has_child("C", Date.today())
       Person.where(name: "C").first.should_not be_nil
     end
     
     it "should have the child" do
-      @c = @a.has_child("C")
+      @c = @a.has_child("C", Date.today())
       @a.children.first.should == Person.where(name: "C").first
       @a.children.first.should == @c
     end
     
     it "should create the child for the other parent too" do
-      @a.has_child("C")
+      @a.has_child("C", Date.today())
       @b.children.first.should == Person.where(name: "C").first
     end
   end
@@ -73,23 +73,23 @@ describe Person do
     
     it "should create multiple children for one parent" do
       ["C", "D", "E"].each do |kid|
-        @a.has_child(kid)
+        @a.has_child(kid, Date.today())
       end
       @a.children.size.should == 3
     end
     
     it "should have the same number of children for the other parent" do
       ["C", "D", "E"].each do |kid|
-        @a.has_child(kid)
+        @a.has_child(kid, Date.today())
       end
       @b.children.size.should == 3
     end
     
     it "should have the same number of children for both parents" do
-      @a.has_child("C")
-      @a.has_child("D")
-      @b.has_child("E")
-      @b.has_child("E")
+      @a.has_child("C", Date.today())
+      @a.has_child("D", Date.today())
+      @b.has_child("E", Date.today())
+      @b.has_child("E", Date.today())
       @a.children.size.should == 4
       @b.children.size.should == 4
     end
@@ -101,12 +101,12 @@ describe Person do
     end
     
     it "should create a child" do
-      @a.has_child("C")
+      @a.has_child("C", Date.today())
       Person.where(name: "C").first.should_not be_nil
     end
     
     it "should have the child" do
-      @c = @a.has_child("C")
+      @c = @a.has_child("C", Date.today())
       @a.children.first.should == @c
     end
     
@@ -117,7 +117,7 @@ describe Person do
       @a = FactoryGirl.create(:person, name: "A")
       @b = FactoryGirl.create(:person, name: "B")
       @a.marry @b
-      @a.has_child("C")
+      @a.has_child("C", Date.today())
       @c = @a.children.first
     end
     
@@ -134,9 +134,9 @@ describe Person do
   describe "has siblings" do
     before(:each) do
       @a = FactoryGirl.create(:person, name: "A")
-      @c = @a.has_child("C")
-      @d = @a.has_child("D")
-      @e = @a.has_child("E")
+      @c = @a.has_child("C", Date.today())
+      @d = @a.has_child("D", Date.today())
+      @e = @a.has_child("E", Date.today())
     end
     
     it "should have 2 siblings for C" do
@@ -171,5 +171,26 @@ describe Person do
       b = @a.create_parent("B", 'Jan 01, 1950')
       b.should be_valid
     end
+  end
+  
+  describe "associating people" do
+    before(:each) do
+      @a = FactoryGirl.create(:person)
+      @b = {"authenticity_token"=>"u5RzQ19lMGqvT8iNc8hHjEieJA1pHBI97GFM2df1yGI=", "relationship"=>"parent", 
+            "person"=>{"name"=>"B", "birthdate(1i)"=>"2012", "birthdate(2i)"=>"8", "birthdate(3i)"=>"6"}, "commit"=>"Create Person"}
+    end
+    
+    it "should create a person B and associate it to A as the parent" do
+      @a.create_relationship('parent', @b)
+      @a.parents.size.should == 1
+      @a.parents[0].name.should == "B"
+    end
+    
+    it "should create person B and associate it to A as a child" do
+      @a.create_relationship('child', @b)
+      @a.children.size.should == 1
+      @a.children[0].name.should == "B"
+    end
+    
   end
 end

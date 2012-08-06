@@ -2,9 +2,13 @@ module PeopleHelper
   
   def build_links(person)
     links = ""
-    links += "Create Parent"
-    links += " | Get Married" unless person.married?
-    links += " | Have Child"
+    links += link_to "Create Parent", new_person_path(relationship: 'parent', origin: person), class: 'create_person'
+    unless person.married?
+      links += " | Get Married" 
+    end
+    links += " | "
+    links += link_to "Have Child", new_person_path(relationship: 'child', origin: person), class: 'create_person'
+    raw(links)
   end
   
   def rotate_text(text)

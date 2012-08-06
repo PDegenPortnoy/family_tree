@@ -19,7 +19,7 @@ describe "people/show" do
   describe "One Parent, One child" do
     before(:each) do
       @a = assign(:person, FactoryGirl.create(:person))
-      @a.has_child("b")
+      @a.has_child("b", Date.today())
       assign(:spouse, @a.spouse)
       assign(:parents, @a.parents)
       assign(:siblings, @a.siblings)

@@ -13,8 +13,9 @@
  */
  
  #dialog-form {
-   border: 1px solid #ccc;
+   border: 2px solid #999;
    padding: 20px;
+   background: #DDD
  }
  
  

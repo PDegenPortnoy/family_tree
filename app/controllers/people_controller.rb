@@ -28,7 +28,10 @@ class PeopleController < ApplicationController
   # GET /people/new
   # GET /people/new.json
   def new
+    logger.debug "params: #{params.inspect}"
     @person = Person.new
+    @relationship = params[:relationship] #this will have parent, or child
+    @origin = params[:origin] # this will have the ID of the original person if relationship is not nil
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +47,15 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.json
   def create
-    @person = Person.new(params[:person])
+    relationship = params.delete('relationship')
+    origin = params.delete('origin')
+    if relationship
+      @person = Person.find(origin)
+      @person.create_relationship(relationship, params)
+      # redirect_to @person and return
+    else
+      @person = Person.new(params[:person])
+    end
 
     respond_to do |format|
       if @person.save
