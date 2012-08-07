@@ -29,6 +29,12 @@ Running at default location: localhost:3000
  * Divorce is not implemented, but would be supported.  People can end their marriage, marry to another, 
    and produce offspring
  * I chose to hide the edit person functionality at this point.
+ * The part of this exercise with which I am not satisfied is how relationships are created.  The Person model is fat so that a person
+   bears the responsibility of getting married and having a child, both of which create the necessary Relationship object.  However,
+   it may have been cleaner to do something like `Couple.create(@partner_a, @partner_b)`.  It seemed just as valid to say
+   `@partner_a.marry(@partner_b)`.  That Person-centric perspective made more sense when having offspring. `Offspring.create(@parent,@child)`
+   was decidedly less satisfying than `@parent.has_child('child_name', birthdate)`. So, I decided to stay with a domain model that seemed
+   more logical to me than stick with the canonical usage of the Relationship hierarchy and RESTful routes for creating relationships
  
 ## Known Issues
  * Through the "parent" link, you can create more than two parents, though that's not possible when
