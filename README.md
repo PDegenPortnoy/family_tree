@@ -4,16 +4,17 @@ August 5, 2012
 
 
 ## To Install
-> git clone git://github.com/PeterDP/family_tree.git
-> cd family_tree
-> bundle install
-> rake db:setup
+ > git clone git://github.com/PeterDP/family_tree.git
+ > cd family_tree
+ > bundle install
+ > rake db:setup
 
 ## To Verify Installation
-> rake spec
+ > rake spec
 
 ## To Run 
-> rails s
+ > rails s
+
 Running at default location: localhost:3000
 
 ## Notes 
