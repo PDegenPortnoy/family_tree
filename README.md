@@ -30,12 +30,12 @@ Running at default location: localhost:3000
    and produce offspring
  * I chose to hide the edit person functionality at this point.
  * The foremost consideration was modeling the relationships between people, which seems to be ideally modeled in a tree relationship
-   Therefore, I explored gems such as acts_as_tree and ancestry.  However, a fundamental assumption in these models is that there is one 
-   root node.  Therefore, while it would have been possible to create each person as a root node, then the offspring as children nodes, 
+   Therefore, I explored gems such as `acts_as_tree` and `ancestry`.  However, a fundamental assumption in these models is that there is one 
+   root node.  While it would have been possible to create each person as a root node, then the offspring as children nodes, 
    modeling marriage and tracking single parents, married parents and divorces/remarriages would have driven significant complexity.
-   Therefore, I decided that there would be two types of relationships, a Couple and Offspring.  Therefore, the only complexity is that when 
-   a person who is in a Couple relationship has an offspring, the spouse is also identified as a parent of the offspring.  This provides the
-   relatively easy definition of a Sibling being anyone who has at least one shared parent.
+   Therefore, I decided that there would be two types of relationships, a Couple and Offspring.  With this model, the only complexity is 
+   that when  a person who is in a Couple relationship has an offspring, the spouse is also identified as a parent of the offspring.  
+   This provides the relatively easy definition of a Sibling being anyone who has at least one shared parent.
  * The part of this exercise with which I am not satisfied is how relationships are created.  The Person model is fat so that a person
    bears the responsibility of getting married and having a child, both of which create the necessary Relationship object.  However,
    it may have been cleaner to do something like `Couple.create(@partner_a, @partner_b)`.  It seemed just as valid to say
