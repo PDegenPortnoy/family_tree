@@ -49,7 +49,7 @@ class PeopleController < ApplicationController
   def create
     relationship = params.delete('relationship')
     origin = params.delete('origin')
-    if relationship
+    unless relationship.empty?
       @person = Person.find(origin)
       @person.create_relationship(relationship, params)
     else
